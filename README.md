@@ -11,22 +11,19 @@
 
 ### Check before Run
 
-- 본 프로젝트는 `Node.JS Electron` 라이브러리에 기반하므로, `Node.JS`의 설치가 필요합니다. [다음 링크](https://nodejs.org/ko)에서
-`Node.JS 18.16.0 LTS` 버전을 다운로드해 설치한 뒤, `PATH` 환경변수에 `Node` 및 `npm` 명령을 등록합니다.
-- `Unix` 환경에서의 Shell 명령을 기반으로 제작된 프로젝트입니다. `Mac OS 13 Ventura`에서 작동을 테스트하였으며,
-이외의 환경(`Windows`, `Linux` 등)에서는 정상적으로 동작하지 않을 수 있습니다.
-- `Git`에서 제공하는 일부 기본 설정이 이루어진 환경에서 정상적으로 동작합니다. 다음 설정값이 존재하지 않거나 올바르지 않은 경우,
-프로그램이 의도와 다르게 동작할 수 있습니다.
-  1. 기본 사용자 이름 및 이메일
+- This Project is based on `Node.JS Electron` Library, so you need to install `Node.JS` before compile. You can get `Node.JS 18.16.0 LTS` Version from [This Link](https://node.js.org), and please register to `PATH` Environment Variable.
+- This Project is tested on `Mac OS 13 Ventura`, so it can be unstable with other System Environments, like `Windows` or `Linux`.
+- Before run, basic settings of `Git` must be done. If these settings are empty or wrong, Program might be have strange results.
+  1. Default User and Email
     ```bash
     yong@macBookAir ~/$ git config --global user.name $USER_NAME
     yong@macBookAir ~/$ git config --global user.email $USER_EMAIL
     ```
-  2. Git 기본 Branch 이름
+  2. Default Branch Name of Git
     ```bash
     yong@macBookAir ~/$ git config --global init.defaultBranch master
     ```
-- OS 환경에서 파일에 접근하기 위한 모든 권한이 올바르게 부여되어있어야 합니다.
+- And also, all permissions about File Management must be granted to our program.
 
 ---
 
