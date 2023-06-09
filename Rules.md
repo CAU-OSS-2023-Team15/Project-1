@@ -57,10 +57,10 @@ doc/convention-documentation
 ```
 [TYPE] TITLE
 ```
-- TYPE 은 다음 중 하나를 선택합니다.
-  - DEV : 일반적인 개발 사항
-  - FIX : 기존에 개발된 내용을 수정하는 사항
-  - DOC : README 등 문서에 관련된 사항
+- TYPE should be selected from the following options:
+  - DEV: General development matters
+  - FIX: Issues related to modifying existing development content
+  - DOC: Matters related to documentation, such as README
 
 ####  Content
 ```markdown
