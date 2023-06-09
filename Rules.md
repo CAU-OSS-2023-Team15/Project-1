@@ -31,12 +31,12 @@ Update Project : Added Electron NPM Package
 ```
 TYPE/BRANCH_NAME
 ```
-- 기본적으로 Branch의 이름은 Issue의 이름을 따릅니다.
-- TYPE은 다음 중 하나를 해당하는 Issue의 Type과 동일하게 선택합니다.
-  - dev : 일반적인 개발 사항
-  - fix : 기존에 개발된 내용을 수정하는 사항
-  - doc : README, Rules 등 문서에 관련된 사항
-- BRANCH_NAME은 해당하는 Issue의 Title을 적절히 변형합니다.
+- By default, the name of the Branch follows the name of the corresponding Issue.
+- TYPE should be selected from the following options to match the type of the Issue:
+  - dev: General development matters
+  - fix: Issues related to modifying existing development content
+  - doc: Matters related to documentation, such as README and rules
+- BRANCH\_NAME should be an appropriate modification of the Title of the corresponding Issue.
 
 #### Branch Example
 ```
