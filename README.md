@@ -28,18 +28,18 @@
 ---
 
 ### How to Compile / Run
-1. 본 프로젝트를 적절한 경로에 `Clone`하고, 디렉토리 내부로 이동합니다.
+1. `Clone` our project to your favorite directory, and move into there.
 ```bash
 yong@macBookAir ~/$ git clone https://github.com/CAU-OSS-2023-Team15/Project-1 Project1
 yong@macBookAir ~/$ cd Project1 
 ```
 
-2. `Node.JS` 의존성 패키지를 설치합니다.
+2. Install Dependency Packages for `Node.JS`.
 ```bash
 yong@macBookAir ~/Project1$ npm install
 ```
 
-3. 프로젝트를 컴파일하고 실행합니다. `package.json` 내에 `start` 명령으로 정의되어있습니다.
+3. Compile and run our project. `start` command is defined at `package.json`.정의되어있습니다.
 ```bash
 yong@macBookAir ~/Project1$ npm start
 ```
