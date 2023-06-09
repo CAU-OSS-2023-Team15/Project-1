@@ -1,11 +1,5 @@
 ## File Manager with Git VCS
 
-### Screenshots
-
-<img src="README_Assets/Proj1_1.png" width="75%">
-<img src="README_Assets/Proj1_2.png" width="75%">
-<img src="README_Assets/Proj1_3.png" width="75%">
-
 ### Team 15
 
 | | 유용민 (CAU CSE 19") | 이상윤 (CAU CSE 19") | 이지윤 (CAU CSE 20") | 장세환 (CAU CSE 19") |
@@ -82,3 +76,9 @@ yong@macBookAir ~/Project1$ npm start
 상단 메뉴의 `Git Commit` 버튼을 클릭하면, `Commit Message`를 입력하기 위한
 다이얼로그가 렌더링됩니다. `Commit Message`를 입력하고 버튼을 클릭하면 `Staged` 상태의
 모든 파일이 `Committed` 상태로 저장됩니다.
+
+### Screenshots
+
+<img src="README_Assets/Proj1_1.png" width="75%">
+<img src="README_Assets/Proj1_2.png" width="75%">
+<img src="README_Assets/Proj1_3.png" width="75%">
