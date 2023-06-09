@@ -57,16 +57,13 @@ Wrong `Git` basic settings means that `Hint` is printed when use `Git` command o
 
 <img src="README_Assets/Proj1_4.png" width="75%">
 
-- `Git Repository`가 아닌 디렉토리에서 상단 메뉴의 `Git Init` 버튼을 클릭하면,
-`.git` 디렉토리가 하위에 생성되고, `Git`을 이용해 프로젝트를 관리할 준비가 완료됩니다.
+- Click `Git Init` Button inside a directory, that is not managed with `Git`, and `.git` directory will be created and be ready for `Git` Usage.
 
 <img src="README_Assets/Proj1_5.png" width="40%">
 
-- `Git Repository` 디렉토리에서 특정 파일을 우클릭하면 `Context Menu`가 렌더링되며,
-메뉴 최하단의 `Git` 하위메뉴에서 Staging 상태를 조작할 수 있습니다. 이때, 각 파일의 상태에 따라
-표시되는 하위메뉴 항목은 다음 표와 같습니다.
+- You can manage Staging status of file with `Git` Submenu of `Context Menu` when right-click each file. Submenu Content will be consisted by Staging status of the file, check table below for detail.
 
-| Git 상태 | 하위메뉴 항목 |
+| Git Status | Submenu Content |
 |---------|-----------|
 | Untracked | Add to Stage |
 | Staged | Unstage |
@@ -74,10 +71,7 @@ Wrong `Git` basic settings means that `Hint` is printed when use `Git` command o
 
 <img src="README_Assets/Proj1_6.png" width="75%">
 
-- `Git Repository` 디렉토리에서 `Staged` 상태의 파일이 존재하는 경우,
-상단 메뉴의 `Git Commit` 버튼을 클릭하면, `Commit Message`를 입력하기 위한
-다이얼로그가 렌더링됩니다. `Commit Message`를 입력하고 버튼을 클릭하면 `Staged` 상태의
-모든 파일이 `Committed` 상태로 저장됩니다.
+- If there is any file which `Git Status` is `Staged`, you can click `Git Commit` Button for commit them. A dialog for entering `Commit Message` will be rendered, and you can click Button for complete commit.
 
 ---
 
