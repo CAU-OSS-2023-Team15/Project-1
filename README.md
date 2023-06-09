@@ -47,12 +47,9 @@ yong@macBookAir ~/Project1$ npm start
 ---
 
 ### Known Issues
-- `Check before Run` 단락에서 언급된 바와 같이, `Git` 기본 설정이 올바르지 않은 경우, 프로그램이 의도와 다르게 동작할 수 있습니다.
-여기서 `Git` 기본 설정이 올바르지 않은 경우란, `Shell` 환경에서 `Git` 명령을 수행했을 때, 설정에 관련된 Hint가 표시되는 경우로,
-이 경우에는 프로그램이 명령의 결과문을 읽어들이는 과정에서 문제가 발생해 원하는 결과대로 작동하지 않을 수 있습니다.
-- 간혹 프로그램을 컴파일하고 실행했을 때, 프로그램의 일부 버튼이 동작하지 않는 경우가 있습니다. 해결을 시도하였으나,
-원본 프로젝트에서부터 이어져온 Issue이며, 별도의 Error Log도 발생하지 않아 원인을 파악하지 못했습니다.
-이러한 경우, 다시 컴파일하고 실행해보면 정상적으로 작동합니다.
+- As mentioned above 'Check before Run' Paragraph, if `Git` basic settings are wrong, Program might be unstable.
+Wrong `Git` basic settings means that `Hint` is printed when use `Git` command on `Shell` Environment, program cannot read the command result correctly.
+- Sometimes after compile and run, buttons in program don't work. Tried to fix it, but this issue is from Original Project, and it doesn't make any Error Logs, so we could not define the cause. It will work after re-compile.
 
 ---
 
