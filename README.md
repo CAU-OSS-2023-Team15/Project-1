@@ -7,6 +7,8 @@
 | Github | [yymin1022](https://github.com/yymin1022) | [falconlee236](https://github.com/falconlee236) | [jiyuneel](https://github.com/jiyuneel) | [sehwanii](https://github.com/sehwanii) |
 | Role  | Project Manager <br> Git Staging 구현 <br> File Management 구현 보조 | 원본 Project 분석 <br> File Management 총괄 구현 | Git Init / Git Status 구현 <br> 예외처리 테스트 | File Management 구현 보조 <br> 예외처리 테스트 |
 
+---
+
 ### Check before Run
 
 - 본 프로젝트는 `Node.JS Electron` 라이브러리에 기반하므로, `Node.JS`의 설치가 필요합니다. [다음 링크](https://nodejs.org/ko)에서
@@ -26,6 +28,8 @@
     ```
 - OS 환경에서 파일에 접근하기 위한 모든 권한이 올바르게 부여되어있어야 합니다.
 
+---
+
 ### How to Compile / Run
 1. 본 프로젝트를 적절한 경로에 `Clone`하고, 디렉토리 내부로 이동합니다.
 ```bash
@@ -43,6 +47,8 @@ yong@macBookAir ~/Project1$ npm install
 yong@macBookAir ~/Project1$ npm start
 ```
 
+---
+
 ### Known Issues
 - `Check before Run` 단락에서 언급된 바와 같이, `Git` 기본 설정이 올바르지 않은 경우, 프로그램이 의도와 다르게 동작할 수 있습니다.
 여기서 `Git` 기본 설정이 올바르지 않은 경우란, `Shell` 환경에서 `Git` 명령을 수행했을 때, 설정에 관련된 Hint가 표시되는 경우로,
@@ -50,6 +56,8 @@ yong@macBookAir ~/Project1$ npm start
 - 간혹 프로그램을 컴파일하고 실행했을 때, 프로그램의 일부 버튼이 동작하지 않는 경우가 있습니다. 해결을 시도하였으나,
 원본 프로젝트에서부터 이어져온 Issue이며, 별도의 Error Log도 발생하지 않아 원인을 파악하지 못했습니다.
 이러한 경우, 다시 컴파일하고 실행해보면 정상적으로 작동합니다.
+
+---
 
 ### How to Use
 
@@ -76,6 +84,8 @@ yong@macBookAir ~/Project1$ npm start
 상단 메뉴의 `Git Commit` 버튼을 클릭하면, `Commit Message`를 입력하기 위한
 다이얼로그가 렌더링됩니다. `Commit Message`를 입력하고 버튼을 클릭하면 `Staged` 상태의
 모든 파일이 `Committed` 상태로 저장됩니다.
+
+---
 
 ### Screenshots
 
