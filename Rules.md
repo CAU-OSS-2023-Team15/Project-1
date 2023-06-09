@@ -1,5 +1,5 @@
 ## Conventions
-- 모든 작업내용은 Issue로 작성한 뒤, Branch를 분리해 작업하고, PR을 통해 Code-Review 이후 Master Branch에 Merge 합니다.
+- All work content is written as an Issue, then separated into Branches for development, and finally merged into the Master Branch through a Code Review using a Pull Request (PR).
 
 ---
 
