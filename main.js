@@ -3241,34 +3241,28 @@ ipcMain.on("show-context-menu", (e, options) => {
     // CALL BUILD TEMPLATE. CREATE NEW FILES
     let menu = Menu.buildFromTemplate(template);
     getGitBranchList(current_directory).then((branchList) => {
-        console.log(branchList);
-
         let gitBranchMenuList = [
             {
                 label: "Git Branch: Create New Branch",
                 click: () => {
-                    console.log("Git Branch Create");
                     gitBranchCreateDialog(current_directory);
                 },
             },
             {
                 label: "Git Branch: Delete a Branch",
                 click: () => {
-                    console.log("Git Branch Delete");
                     gitBranchDeleteDialog(current_directory, branchList);
                 },
             },
             {
                 label: "Git Branch: Rename a Branch",
                 click: () => {
-                    console.log("Git Branch Rename");
                     gitBranchRenameDialog(current_directory, branchList);
                 },
             },
             {
                 label: "Git Branch: Checkout to other Branch",
                 click: () => {
-                    console.log("Git Branch Checkout");
                     gitBranchCheckoutDialog(current_directory, branchList);
                 },
             },
@@ -3521,8 +3515,6 @@ ipcMain.on("show-context-menu-files", (e, args) => {
     let menu = Menu.buildFromTemplate(files_menu_template);
 
     getGitStatus(args.href, false).then((fileStatus) => {
-        console.log(fileStatus);
-
         let gitMenuList = [];
         if (fileStatus === 0) {
             // git rm --cached
@@ -3662,11 +3654,11 @@ const getGitStatus = (filePath, isDirectory) => {
         }`;
         exec(cmd, (error, stdout, stderr) => {
             if (error) {
-                console.log(`Error: ${error.message}`);
+                BrowserWindow.getFocusedWindow().send("notification", error.message);
                 resolve(-1);
             }
             if (stderr) {
-                console.log(`Stderr: ${stderr}`);
+                BrowserWindow.getFocusedWindow().send("notification", stderr);
                 resolve(-1);
             }
 
@@ -3709,11 +3701,11 @@ const runGitCommand = (filePath, gitCmd, e) => {
     let cmd = `cd ${filePathDir} && ${gitCmd} ${filePath}`;
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
-            console.log(`Error: ${error.message}`);
+            BrowserWindow.getFocusedWindow().send("notification", error.message);
             resolve(-1);
         }
         if (stderr) {
-            console.log(`Stderr: ${stderr}`);
+            BrowserWindow.getFocusedWindow().send("notification", stderr);
             resolve(-1);
         }
         e.sender.send("refresh");
@@ -3767,11 +3759,11 @@ ipcMain.on("git_rename_confirmed", (e, filePath, rename_input_str) => {
     let cmd = `cd ${filePathDir} && git mv ${filePath} ${rename_input_str}`;
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
-            console.log(`Error: ${error.message}`);
+            BrowserWindow.getFocusedWindow().send("notification", error.message);
             resolve(-1);
         }
         if (stderr) {
-            console.log(`Stderr: ${stderr}`);
+            BrowserWindow.getFocusedWindow().send("notification", stderr);
             resolve(-1);
         }
         BrowserWindow.getFocusedWindow().send("refresh");
@@ -3792,14 +3784,13 @@ function gitInitialize(dirPath, e) {
     let cmd = `cd ${dirPath} && git init`;
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
-            console.error(`${error}`);
+            BrowserWindow.getFocusedWindow().send("notification", error.message);
             return;
         }
         if (stderr) {
-            console.error(`${stderr}`);
+            BrowserWindow.getFocusedWindow().send("notification", stderr);
             return;
         }
-        console.log(stdout);
         e.sender.send("refresh");
     });
 }
@@ -3809,11 +3800,11 @@ ipcMain.on("git_init", (e) => {
     let checkGitRepo = `cd ${dirPath} && ls -a | grep -w .git | wc -l`;
     exec(checkGitRepo, (error, stdout, stderr) => {
         if (error) {
-            console.error(`${error}`);
+            BrowserWindow.getFocusedWindow().send("notification", error.message);
             return;
         }
         if (stderr) {
-            console.error(`${stderr}`);
+            BrowserWindow.getFocusedWindow().send("notification", stderr);
             return;
         }
 
@@ -4013,7 +4004,6 @@ const gitClonePrivateExec = (
     let cmd = `cd ${filePath} && git clone \"${http}${github_id}:${github_access_token}@${github_repo_address_substr}\"`;
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
-            console.log(`Error: ${error.message}`);
             BrowserWindow.getFocusedWindow().send(
                 "notification",
                 error.message
@@ -4022,7 +4012,6 @@ const gitClonePrivateExec = (
             return;
         }
         if (stderr) {
-            console.log(`Stderr: ${stderr}`);
             BrowserWindow.getFocusedWindow().send("notification", stderr);
             BrowserWindow.getFocusedWindow().send("refresh");
         }
@@ -4112,11 +4101,11 @@ ipcMain.on("git_commit_confirmed", (e, filePath, commit_message_input_str) => {
     let cmd = `cd ${filePath} && git commit -m \"${commit_message_input_str}\"`;
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
-            console.log(`Error: ${error.message}`);
+            BrowserWindow.getFocusedWindow().send("notification", error.message);
             resolve(-1);
         }
         if (stderr) {
-            console.log(`Stderr: ${stderr}`);
+            BrowserWindow.getFocusedWindow().send("notification", stderr);
             resolve(-1);
         }
         BrowserWindow.getFocusedWindow().send("refresh");
@@ -4401,17 +4390,14 @@ ipcMain.on("git_merge_confirmed", (e, filePath, targetBranch) => {
 });
 
 const getGitBranchList = (filePath) => {
-    console.log(filePath);
     return new Promise((resolve) => {
         let filePathDir = filePath.replaceAll(" ", "\\ ");
         let cmd = `cd ${filePathDir} && git branch`;
         exec(cmd, (error, stdout, stderr) => {
             if (error) {
-                console.log(`Error: ${error.message}`);
                 resolve(-1);
             }
             if (stderr) {
-                console.log(`Stderr: ${stderr}`);
                 resolve(-1);
             }
 
@@ -4426,7 +4412,6 @@ const getGitBranchList = (filePath) => {
                     i--;
                 }
             }
-            console.log(branchList);
             resolve(branchList);
         });
     });
@@ -4477,7 +4462,6 @@ ipcMain.on("git_branch_create_confirmed", (e, filePath, name_input_str) => {
     let cmd = `cd ${filePath} && git branch \"${name_input_str}\"`;
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
-            console.log(`Error: ${error.message}`);
             BrowserWindow.getFocusedWindow().send(
                 "notification",
                 error.message
@@ -4487,7 +4471,6 @@ ipcMain.on("git_branch_create_confirmed", (e, filePath, name_input_str) => {
             return;
         }
         if (stderr) {
-            console.log(`Stderr: ${stderr}`);
             BrowserWindow.getFocusedWindow().send("notification", stderr);
             BrowserWindow.getFocusedWindow().send("refresh");
             resolve(-1);
@@ -4552,7 +4535,6 @@ ipcMain.on("git_branch_delete_confirmed", (e, filePath, branchName) => {
     let cmd = `cd ${filePath} && git branch -D \"${branchName}\"`;
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
-            console.log(`Error: ${error.message}`);
             BrowserWindow.getFocusedWindow().send(
                 "notification",
                 error.message
@@ -4562,7 +4544,6 @@ ipcMain.on("git_branch_delete_confirmed", (e, filePath, branchName) => {
             return;
         }
         if (stderr) {
-            console.log(`Stderr: ${stderr}`);
             BrowserWindow.getFocusedWindow().send("notification", stderr);
             BrowserWindow.getFocusedWindow().send("refresh");
             resolve(-1);
@@ -4629,7 +4610,6 @@ ipcMain.on(
         let cmd = `cd ${filePath} && git branch -m \"${branchName}\" \"${newName}\"`;
         exec(cmd, (error, stdout, stderr) => {
             if (error) {
-                console.log(`Error: ${error.message}`);
                 BrowserWindow.getFocusedWindow().send(
                     "notification",
                     error.message
@@ -4639,7 +4619,6 @@ ipcMain.on(
                 return;
             }
             if (stderr) {
-                console.log(`Stderr: ${stderr}`);
                 BrowserWindow.getFocusedWindow().send("notification", stderr);
                 BrowserWindow.getFocusedWindow().send("refresh");
                 resolve(-1);
@@ -4705,7 +4684,6 @@ ipcMain.on("git_branch_checkout_confirmed", (e, filePath, branchName) => {
     let cmd = `cd ${filePath} && git checkout \"${branchName}\"`;
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
-            console.log(`Error: ${error.message}`);
             BrowserWindow.getFocusedWindow().send(
                 "notification",
                 error.message
@@ -4715,7 +4693,6 @@ ipcMain.on("git_branch_checkout_confirmed", (e, filePath, branchName) => {
             return;
         }
         if (stderr) {
-            console.log(`Stderr: ${stderr}`);
             BrowserWindow.getFocusedWindow().send("notification", stderr);
             BrowserWindow.getFocusedWindow().send("refresh");
             resolve(-1);
@@ -4734,3 +4711,15 @@ ipcMain.on("git_branch_checkout_canceled", (e) => {
     let confirm = BrowserWindow.getFocusedWindow();
     confirm.hide();
 });
+
+ipcMain.on("current_branch", (e) => {
+    let dirPath = current_directory.replaceAll(" ", "\\ ");
+    let checkGitBranch = `cd ${dirPath} && git branch --show-current`;
+    exec(checkGitBranch, (error, stdout, stderr) => {
+        let resultMsg = stdout;
+        if (error || stderr) {
+            resultMsg = "Not a Git Repository";
+        }
+        e.sender.send("show_current_branch", resultMsg);
+    });
+})
