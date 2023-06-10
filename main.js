@@ -3891,15 +3891,22 @@ ipcMain.on("repo_visibility_selected", (e, filePath, repo_visibility) => {
     });
 });
 
-ipcMain.on("git_clone_confirmed", (e, filePath, github_repo_address,
-                                   repo_visibility, github_id, github_access_token) => {
+ipcMain.on(
+    "git_clone_confirmed",
+    (
+        e,
+        filePath,
+        github_repo_address,
+        repo_visibility,
+        github_id,
+        github_access_token
+    ) => {
+        let confirm = BrowserWindow.getFocusedWindow();
+        confirm.hide();
 
-    let confirm = BrowserWindow.getFocusedWindow();
-    confirm.hide();
-
-    if (repo_visibility === "public_repository") {
-        gitClonePublic(filePath, github_repo_address);
-    }
+        if (repo_visibility === "public_repository") {
+            gitClonePublic(filePath, github_repo_address);
+        }
     if (repo_visibility === "private_repository") {
         gitClonePrivate(filePath, github_repo_address, github_id, github_access_token);
     }
@@ -3911,7 +3918,10 @@ const gitClonePublic = (filePath, github_repo_address) => {
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
             console.log(`Error: ${error.message}`);
-            BrowserWindow.getFocusedWindow().send("notification", error.message);
+            BrowserWindow.getFocusedWindow().send(
+                "notification",
+                error.message
+            );
             BrowserWindow.getFocusedWindow().send("refresh");
             return;
         }
@@ -3926,9 +3936,14 @@ const gitClonePublic = (filePath, github_repo_address) => {
         );
     });
     BrowserWindow.getFocusedWindow().send("refresh");
-}
+};
 
-const gitClonePrivate = (filePath, github_repo_address, github_id, github_access_token) => {
+const gitClonePrivate = (
+    filePath,
+    github_repo_address,
+    github_id,
+    github_access_token
+) => {
     filePath = filePath.replaceAll(" ", "\\ ");
 
     let checkGithubInfo = `cd ${filePath} && ls -a | grep -w GithubInfo.txt | wc -l`;
@@ -3967,19 +3982,32 @@ const gitClonePrivate = (filePath, github_repo_address, github_id, github_access
                 console.log(`Stderr: ${stderr}`);
                 return;
             }
-            gitClonePrivateExec(filePath, github_repo_address, stdout.split("\n")[0], stdout.split("\n")[1]);
+            gitClonePrivateExec(
+                filePath,
+                github_repo_address,
+                stdout.split("\n")[0],
+                stdout.split("\n")[1]
+            );
         });
     });
-}
+};
 
-const gitClonePrivateExec = (filePath, github_repo_address, github_id, github_access_token) => {
+const gitClonePrivateExec = (
+    filePath,
+    github_repo_address,
+    github_id,
+    github_access_token
+) => {
     let http = "https://";
     let github_repo_address_substr = github_repo_address.substring(8);
 
     let cmd = `cd ${filePath} && git clone \"${http}${github_id}:${github_access_token}@${github_repo_address_substr}\"`;
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
-            BrowserWindow.getFocusedWindow().send("notification", error.message);
+            BrowserWindow.getFocusedWindow().send(
+                "notification",
+                error.message
+            );
             BrowserWindow.getFocusedWindow().send("refresh");
             return;
         }
@@ -3993,7 +4021,7 @@ const gitClonePrivateExec = (filePath, github_repo_address, github_id, github_ac
         );
     });
     BrowserWindow.getFocusedWindow().send("refresh");
-}
+};
 
 ipcMain.on("git_clone_canceled", (e) => {
     let confirm = BrowserWindow.getFocusedWindow();
@@ -4314,25 +4342,43 @@ const getBranchData = (filePath) => {
     });
 };
 
+const getUnmergedPath = (filePath) => {
+    return new Promise((resolve, reject) => {
+        let cmd = `cd ${filePath} && git diff --name-only --diff-filter=U`;
+        exec(cmd, (error, stdout, stderr) => {
+            if (error) {
+                reject(error.message);
+            }
+            if (stderr) {
+                reject(stderr);
+            }
+            resolve(stdout.replaceAll("\n", ", "));
+        });
+    });
+};
+
 ipcMain.on("git_merge_confirmed", (e, filePath, targetBranch) => {
     let confirm = BrowserWindow.getFocusedWindow();
     confirm.hide();
     filePath = filePath.replaceAll(" ", "\\ ");
     let cmd = `cd ${filePath} && git merge ${targetBranch} -m \"merge ${targetBranch}\"`;
     exec(cmd, (error, stdout, stderr) => {
-        if (error) {
-            exec(`cd ${filePath} && git merge --abort`);
-            BrowserWindow.getFocusedWindow().send(
-                "notification",
-                error.message
-            );
-            BrowserWindow.getFocusedWindow().send("refresh");
-            resolve(-1);
-            return;
-        }
-        if (stderr) {
-            BrowserWindow.getFocusedWindow().send("notification", stderr);
-            BrowserWindow.getFocusedWindow().send("refresh");
+        if (error || stderr) {
+            getUnmergedPath(filePath).then((unMergedPath) => {
+                const errorMsg = error ? error.message : stderr;
+                console.log(errorMsg);
+                exec(
+                    `cd ${filePath} && sleep 0.1 && git merge --abort`,
+                    (err, stdout0, stderr0) => {
+                        BrowserWindow.getFocusedWindow().send(
+                            "notification",
+                            `${errorMsg}, unMergedPath : ${unMergedPath}`
+                        );
+                        BrowserWindow.getFocusedWindow().send("refresh");
+                        resolve(-1);
+                    }
+                );
+            });
             return;
         }
         BrowserWindow.getFocusedWindow().send(
