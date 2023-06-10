@@ -4188,29 +4188,43 @@ const getBranchData = (filePath) => {
     });
 };
 
+const getUnmergedPath = (filePath) => {
+    return new Promise((resolve, reject) => {
+        let cmd = `cd ${filePath} && git diff --name-only --diff-filter=U`;
+        exec(cmd, (error, stdout, stderr) => {
+            if (error) {
+                reject(error.message);
+            }
+            if (stderr) {
+                reject(stderr);
+            }
+            resolve(stdout.replaceAll("\n", ", "));
+        });
+    });
+};
+
 ipcMain.on("git_merge_confirmed", (e, filePath, targetBranch) => {
     let confirm = BrowserWindow.getFocusedWindow();
     confirm.hide();
     filePath = filePath.replaceAll(" ", "\\ ");
     let cmd = `cd ${filePath} && git merge ${targetBranch} -m \"merge ${targetBranch}\"`;
     exec(cmd, (error, stdout, stderr) => {
-        if (error) {
-            exec(`cd ${filePath} && git merge --abort`);
-            console.log(`Error: ${error.message}`);
-            BrowserWindow.getFocusedWindow().send(
-                "notification",
-                error.message
-            );
-            BrowserWindow.getFocusedWindow().send("refresh");
-            resolve(-1);
-            return;
-        }
-        if (stderr) {
-            exec(`cd ${filePath} && git merge --abort`);
-            console.log(`Stderr: ${stderr}`);
-            BrowserWindow.getFocusedWindow().send("notification", stderr);
-            BrowserWindow.getFocusedWindow().send("refresh");
-            resolve(-1);
+        if (error || stderr) {
+            getUnmergedPath(filePath).then((unMergedPath) => {
+                const errorMsg = error ? error.message : stderr;
+                console.log(errorMsg);
+                exec(
+                    `cd ${filePath} && sleep 0.1 && git merge --abort`,
+                    (err, stdout0, stderr0) => {
+                        BrowserWindow.getFocusedWindow().send(
+                            "notification",
+                            `${errorMsg}, unMergedPath : ${unMergedPath}`
+                        );
+                        BrowserWindow.getFocusedWindow().send("refresh");
+                        resolve(-1);
+                    }
+                );
+            });
             return;
         }
         BrowserWindow.getFocusedWindow().send(
