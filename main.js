@@ -3871,19 +3871,32 @@ ipcMain.on("repo_visibility_selected", (e, filePath, repo_visibility) => {
     });
 });
 
-ipcMain.on("git_clone_confirmed", (e, filePath, github_repo_address,
-        repo_visibility, github_id, github_access_token) => {
+ipcMain.on(
+    "git_clone_confirmed",
+    (
+        e,
+        filePath,
+        github_repo_address,
+        repo_visibility,
+        github_id,
+        github_access_token
+    ) => {
+        let confirm = BrowserWindow.getFocusedWindow();
+        confirm.hide();
 
-    let confirm = BrowserWindow.getFocusedWindow();
-    confirm.hide();
-
-    if (repo_visibility === "public_repository") {
-        gitClonePublic(filePath, github_repo_address);
+        if (repo_visibility === "public_repository") {
+            gitClonePublic(filePath, github_repo_address);
+        }
+        if (repo_visibility === "private_repository") {
+            gitClonePrivate(
+                filePath,
+                github_repo_address,
+                github_id,
+                github_access_token
+            );
+        }
     }
-    if (repo_visibility === "private_repository") {
-        gitClonePrivate(filePath, github_repo_address, github_id, github_access_token);
-    } 
-});
+);
 
 const gitClonePublic = (filePath, github_repo_address) => {
     filePath = filePath.replaceAll(" ", "\\ ");
@@ -3891,7 +3904,10 @@ const gitClonePublic = (filePath, github_repo_address) => {
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
             console.log(`Error: ${error.message}`);
-            BrowserWindow.getFocusedWindow().send("notification", error.message);
+            BrowserWindow.getFocusedWindow().send(
+                "notification",
+                error.message
+            );
             BrowserWindow.getFocusedWindow().send("refresh");
             return;
         }
@@ -3906,9 +3922,14 @@ const gitClonePublic = (filePath, github_repo_address) => {
         );
     });
     BrowserWindow.getFocusedWindow().send("refresh");
-}
+};
 
-const gitClonePrivate = (filePath, github_repo_address, github_id, github_access_token) => {
+const gitClonePrivate = (
+    filePath,
+    github_repo_address,
+    github_id,
+    github_access_token
+) => {
     filePath = filePath.replaceAll(" ", "\\ ");
 
     let checkGithubInfo = `cd ${filePath} && ls -a | grep -w GithubInfo.txt | wc -l`;
@@ -3947,12 +3968,22 @@ const gitClonePrivate = (filePath, github_repo_address, github_id, github_access
                 console.log(`Stderr: ${stderr}`);
                 return;
             }
-            gitClonePrivateExec(filePath, github_repo_address, stdout.split("\n")[0], stdout.split("\n")[1]);
+            gitClonePrivateExec(
+                filePath,
+                github_repo_address,
+                stdout.split("\n")[0],
+                stdout.split("\n")[1]
+            );
         });
     });
-}
+};
 
-const gitClonePrivateExec = (filePath, github_repo_address, github_id, github_access_token) => {
+const gitClonePrivateExec = (
+    filePath,
+    github_repo_address,
+    github_id,
+    github_access_token
+) => {
     let http = "https://";
     let github_repo_address_substr = github_repo_address.substring(8);
 
@@ -3960,7 +3991,10 @@ const gitClonePrivateExec = (filePath, github_repo_address, github_id, github_ac
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
             console.log(`Error: ${error.message}`);
-            BrowserWindow.getFocusedWindow().send("notification", error.message);
+            BrowserWindow.getFocusedWindow().send(
+                "notification",
+                error.message
+            );
             BrowserWindow.getFocusedWindow().send("refresh");
             return;
         }
@@ -3975,7 +4009,7 @@ const gitClonePrivateExec = (filePath, github_repo_address, github_id, github_ac
         );
     });
     BrowserWindow.getFocusedWindow().send("refresh");
-}
+};
 
 ipcMain.on("git_clone_canceled", (e) => {
     let confirm = BrowserWindow.getFocusedWindow();
@@ -4172,6 +4206,7 @@ ipcMain.on("git_merge_confirmed", (e, filePath, targetBranch) => {
             return;
         }
         if (stderr) {
+            exec(`cd ${filePath} && git merge --abort`);
             console.log(`Stderr: ${stderr}`);
             BrowserWindow.getFocusedWindow().send("notification", stderr);
             BrowserWindow.getFocusedWindow().send("refresh");
