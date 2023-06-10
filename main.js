@@ -4210,6 +4210,7 @@ ipcMain.on("git_merge_confirmed", (e, filePath, targetBranch) => {
             console.log(`Stderr: ${stderr}`);
             BrowserWindow.getFocusedWindow().send("notification", stderr);
             BrowserWindow.getFocusedWindow().send("refresh");
+            resolve(-1);
             return;
         }
         BrowserWindow.getFocusedWindow().send(
