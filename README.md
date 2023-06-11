@@ -78,30 +78,38 @@ Wrong `Git` basic settings means that `Hint` is printed when use `Git` command o
 
 ### How to Use (Project #2)
 
-IMAGE_BRANCH_MANAGE_MENUS
+<img src="README_Assets/Proj2_1.png" width="100%">
 
-IMAGE_BRANCH_MANAGE_DIALOGS
+<img src="README_Assets/Proj2_2.png" width="75%">
+
+<img src="README_Assets/Proj2_3.png" width="40%">
+
+<img src="README_Assets/Proj2_4.png" width="40%">
+
+<img src="README_Assets/Proj2_5.png" width="40%">
+
+<img src="README_Assets/Proj2_6.png" width="40%">
 
 - You can manage Branchess with `Git` Submenu of `Context Menu` when right-click Empty Area of `Git-Managed` Directory.
 It contains `Create`, `Delete`, `Rename`, `Checkout`. For `Create`, name input dialog will be rendered, and for the others,
 select a branch dialog will be rendered.
 
-IMAGE_BRANCH_MERGE_DIALOG
+<img src="README_Assets/Proj2_7.png" width="75%">
 
 - You can merge other branch to current branch with `Git Merge` button at Top Menu. You can select a branch for merging from dialog,
 if Auto-Merge fails, it will be automatically abort the merge process and notify unmerged paths at right bottom of window.
 
-IMAGE_COMMIT_HISTORY_LIST
+<img src="README_Assets/Proj2_8.png" width="55%">
 
-IMAGE_COMMIT_DETAIL
+<img src="README_Assets/Proj2_9.png" width="55%">
 
 - You can check `Commit History` and `Branch Graph` with `Git History` button at Top Menu. When click,
 history list with branch graph will be rendered to dialog, and if you click commit point (`*`),
 you can check detail information of each commits. It is same with `git show` command.
 
-IMAGE_GIT_CLONE_PUBLIC
+<img src="README_Assets/Proj2_10.png" width="55%">
 
-IMAGE_GIT_CLONE_PRIVATE
+<img src="README_Assets/Proj2_11.png" width="55%">
 
 - With `Git Clone` button of Top menu, you can clone a Remote Repository. It only supports `https` type, not the `ssh` type.
 Public Repository can be cloned with only URL, and if you select Private Repository, you must enter Remote ID and Token/PW.
