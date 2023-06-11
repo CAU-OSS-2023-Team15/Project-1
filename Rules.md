@@ -1,6 +1,5 @@
 ## Conventions
-
-- 모든 작업내용은 Issue로 작성한 뒤, Branch를 분리해 작업하고, PR을 통해 Code-Review 이후 Master Branch에 Merge 합니다.
+- All work content is written as an Issue, then separated into Branches for development, and finally merged into the Master Branch through a Code Review using a Pull Request (PR).
 
 ---
 
@@ -8,12 +7,12 @@
 ```
 __Action__ __FileName__ : __Description__
 ```
-- Action 은 다음과 같이 두가지 종류로 구분됩니다.
-    - Added : 새로운 파일을 추가한 경우
-    - Update : 특정 파일을 수정한 경우
-- FileName 은 추가 혹은 수정한 파일의 이름을 의미합니다.
-    - Dependency, Gitignore과 같이 프로젝트 전역의 설정 파일을 수정한 경우에는 ```Update Project```와 같이 작성합니다.
-- Description 은 Commit에서 변경된 내용을 한 문장으로 요약합니다.
+- Actions are divided into two categories:
+  - Added: When adding a new file.
+  - Update: When modifying a specific file.
+- FileName refers to the name of the file that was added or modified.
+  - If the modification is related to project-wide configuration files, such as Dependency or Gitignore, write it as "Update Project."
+- Description summarizes the changes made in the commit in one sentence.
 
 #### Commit Example
 ```
@@ -32,12 +31,12 @@ Update Project : Added Electron NPM Package
 ```
 TYPE/BRANCH_NAME
 ```
-- 기본적으로 Branch의 이름은 Issue의 이름을 따릅니다.
-- TYPE은 다음 중 하나를 해당하는 Issue의 Type과 동일하게 선택합니다.
-  - dev : 일반적인 개발 사항
-  - fix : 기존에 개발된 내용을 수정하는 사항
-  - doc : README, Rules 등 문서에 관련된 사항
-- BRANCH_NAME은 해당하는 Issue의 Title을 적절히 변형합니다.
+- By default, the name of the Branch follows the name of the corresponding Issue.
+- TYPE should be selected from the following options to match the type of the Issue:
+  - dev: General development matters
+  - fix: Issues related to modifying existing development content
+  - doc: Matters related to documentation, such as README and rules
+- BRANCH\_NAME should be an appropriate modification of the Title of the corresponding Issue.
 
 #### Branch Example
 ```
@@ -58,10 +57,10 @@ doc/convention-documentation
 ```
 [TYPE] TITLE
 ```
-- TYPE 은 다음 중 하나를 선택합니다.
-  - DEV : 일반적인 개발 사항
-  - FIX : 기존에 개발된 내용을 수정하는 사항
-  - DOC : README 등 문서에 관련된 사항
+- TYPE should be selected from the following options:
+  - DEV: General development matters
+  - FIX: Issues related to modifying existing development content
+  - DOC: Matters related to documentation, such as README
 
 ####  Content
 ```markdown
@@ -71,10 +70,8 @@ Summary of Issue or PR
 ## Description
 Detail Description of Issue or PR
 ```
-- Description 항목이 불필요한 경우에는 생략할 수 있습니다.
-- FIX Issue 혹은 UI에 관련된 PR의 경우는, Description에 스크린샷을 첨부해주시기 바랍니다.
-- Issue 작성 시, Assignee와 Label을 지정하고, 생성한 Branch를 Development 항목에 지정해줍니다.
-- PR 작성 시, Assignee와 Label을 지정하고, Reviewer을 상호로 지정하고, 해당하는 Issue를 Development 항목에 지정해줍니다.
-- PR 작성 시, Reviewer 항목에는 자기 자신을 제외한 3명의 팀원을 지정합니다. Reviewer로 지정된 각 팀원은 PR에 포함된 코드를 읽고,
-문제가 있어보이거나 의문이 드는 코드에 대해 코멘트를 남겨주세요. 완벽해 보인다면 Approve 코멘트를 남깁니다.
-3명 모두 Approve가 완료되었다면 PR을 작성한 팀원이 직접 Merge 합니다.
+- The Description section can be omitted if unnecessary.
+- For FIX Issues or PRs related to UI, please attach screenshots in the Description.
+- When creating an Issue, assign Assignee and Label, and specify the created Branch under the Development section.
+- When creating a PR, assign Assignee and Label, assign Reviewers to each other, and specify the relevant Issue under the Development section.
+- When creating a PR, specify three team members as Reviewers, excluding oneself. Each designated Reviewer should read the code included in the PR and leave comments on any problematic or questionable code. If everything looks perfect, they can leave an "Approve" comment. Once all three Reviewers have approved, the team member who created the PR can proceed with the Merge.

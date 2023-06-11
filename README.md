@@ -1,76 +1,70 @@
 ## File Manager with Git VCS
 
-### Screenshots
-
-<img src="README_Assets/Proj1_1.png" width="75%">
-<img src="README_Assets/Proj1_2.png" width="75%">
-<img src="README_Assets/Proj1_3.png" width="75%">
-
 ### Team 15
 
-| | 유용민 (CAU CSE 19") | 이상윤 (CAU CSE 19") | 이지윤 (CAU CSE 20") | 장세환 (CAU CSE 19") |
-|-|-|-|-|-|
-| Github | [yymin1022](https://github.com/yymin1022) | [falconlee236](https://github.com/falconlee236) | [jiyuneel](https://github.com/jiyuneel) | [sehwanii](https://github.com/sehwanii) |
-| Role  | Project Manager <br> Git Staging 구현 <br> File Management 구현 보조 | 원본 Project 분석 <br> File Management 총괄 구현 | Git Init / Git Status 구현 <br> 예외처리 테스트 | File Management 구현 보조 <br> 예외처리 테스트 |
+|                    | 유용민 (CAU CSE 19")                             | 이상윤 (CAU CSE 19")                               | 이지윤 (CAU CSE 20")                     | 장세환 (CAU CSE 19")                       |
+|--------------------|-----------------------------------------------|-------------------------------------------------|---------------------------------------|-----------------------------------------|
+| Github             | [yymin1022](https://github.com/yymin1022)     | [falconlee236](https://github.com/falconlee236) | [jiyuneel](https://github.com/jiyuneel) | [sehwanii](https://github.com/sehwanii) |
+| Project #1<br>Role | Project Manager <br> Git Staging 구현 <br> File Management 구현 보조 | 원본 Project 분석 <br> File Management 총괄 구현        | Git Init / Git Status 구현 <br> 예외처리 테스트 | File Management 구현 보조 <br> 예외처리 테스트     |
+| Project #2<br>Role | Project Manager <br> Git Branch Management 구현 | Git Branch Merge 구현                             | Git Clone 구현              | Git Commit History 구현                   |
+
+---
 
 ### Check before Run
 
-- 본 프로젝트는 `Node.JS Electron` 라이브러리에 기반하므로, `Node.JS`의 설치가 필요합니다. [다음 링크](https://nodejs.org/ko)에서
-`Node.JS 18.16.0 LTS` 버전을 다운로드해 설치한 뒤, `PATH` 환경변수에 `Node` 및 `npm` 명령을 등록합니다.
-- `Unix` 환경에서의 Shell 명령을 기반으로 제작된 프로젝트입니다. `Mac OS 13 Ventura`에서 작동을 테스트하였으며,
-이외의 환경(`Windows`, `Linux` 등)에서는 정상적으로 동작하지 않을 수 있습니다.
-- `Git`에서 제공하는 일부 기본 설정이 이루어진 환경에서 정상적으로 동작합니다. 다음 설정값이 존재하지 않거나 올바르지 않은 경우,
-프로그램이 의도와 다르게 동작할 수 있습니다.
-  1. 기본 사용자 이름 및 이메일
+- This Project is based on `Node.JS Electron` Library, so you need to install `Node.JS` before compile. You can get `Node.JS 18.16.0 LTS` Version from [This Link](https://node.js.org), and please register to `PATH` Environment Variable.
+- This Project is tested on `Mac OS 13 Ventura`, so it can be unstable with other System Environments, like `Windows` or `Linux`.
+- Before run, basic settings of `Git` must be done. If these settings are empty or wrong, Program might be have strange results.
+  1. Default User and Email
     ```bash
     yong@macBookAir ~/$ git config --global user.name $USER_NAME
     yong@macBookAir ~/$ git config --global user.email $USER_EMAIL
     ```
-  2. Git 기본 Branch 이름
+  2. Default Branch Name of Git
     ```bash
     yong@macBookAir ~/$ git config --global init.defaultBranch master
     ```
-- OS 환경에서 파일에 접근하기 위한 모든 권한이 올바르게 부여되어있어야 합니다.
+- And also, all permissions about File Management must be granted to our program.
+
+---
 
 ### How to Compile / Run
-1. 본 프로젝트를 적절한 경로에 `Clone`하고, 디렉토리 내부로 이동합니다.
+1. `Clone` our project to your favorite directory, and move into there.
 ```bash
 yong@macBookAir ~/$ git clone https://github.com/CAU-OSS-2023-Team15/Project-1 Project1
 yong@macBookAir ~/$ cd Project1 
 ```
 
-2. `Node.JS` 의존성 패키지를 설치합니다.
+2. Install Dependency Packages for `Node.JS`.
 ```bash
 yong@macBookAir ~/Project1$ npm install
 ```
 
-3. 프로젝트를 컴파일하고 실행합니다. `package.json` 내에 `start` 명령으로 정의되어있습니다.
+3. Compile and run our project. `start` command is defined at `package.json`.정의되어있습니다.
 ```bash
 yong@macBookAir ~/Project1$ npm start
 ```
 
-### Known Issues
-- `Check before Run` 단락에서 언급된 바와 같이, `Git` 기본 설정이 올바르지 않은 경우, 프로그램이 의도와 다르게 동작할 수 있습니다.
-여기서 `Git` 기본 설정이 올바르지 않은 경우란, `Shell` 환경에서 `Git` 명령을 수행했을 때, 설정에 관련된 Hint가 표시되는 경우로,
-이 경우에는 프로그램이 명령의 결과문을 읽어들이는 과정에서 문제가 발생해 원하는 결과대로 작동하지 않을 수 있습니다.
-- 간혹 프로그램을 컴파일하고 실행했을 때, 프로그램의 일부 버튼이 동작하지 않는 경우가 있습니다. 해결을 시도하였으나,
-원본 프로젝트에서부터 이어져온 Issue이며, 별도의 Error Log도 발생하지 않아 원인을 파악하지 못했습니다.
-이러한 경우, 다시 컴파일하고 실행해보면 정상적으로 작동합니다.
+---
 
-### How to Use
+### Known Issues
+- As mentioned above 'Check before Run' Paragraph, if `Git` basic settings are wrong, Program might be unstable.
+Wrong `Git` basic settings means that `Hint` is printed when use `Git` command on `Shell` Environment, program cannot read the command result correctly.
+- Sometimes after compile and run, buttons in program don't work. Tried to fix it, but this issue is from Original Project, and it doesn't make any Error Logs, so we could not define the cause. It will work after re-compile.
+
+---
+
+### How to Use (Project #1)
 
 <img src="README_Assets/Proj1_4.png" width="75%">
 
-- `Git Repository`가 아닌 디렉토리에서 상단 메뉴의 `Git Init` 버튼을 클릭하면,
-`.git` 디렉토리가 하위에 생성되고, `Git`을 이용해 프로젝트를 관리할 준비가 완료됩니다.
+- Click `Git Init` Button inside a directory, that is not managed with `Git`, and `.git` directory will be created and be ready for `Git` Usage.
 
 <img src="README_Assets/Proj1_5.png" width="40%">
 
-- `Git Repository` 디렉토리에서 특정 파일을 우클릭하면 `Context Menu`가 렌더링되며,
-메뉴 최하단의 `Git` 하위메뉴에서 Staging 상태를 조작할 수 있습니다. 이때, 각 파일의 상태에 따라
-표시되는 하위메뉴 항목은 다음 표와 같습니다.
+- You can manage Staging status of file with `Git` Submenu of `Context Menu` when right-click each file. Submenu Content will be consisted by Staging status of the file, check table below for detail.
 
-| Git 상태 | 하위메뉴 항목 |
+| Git Status | Submenu Content |
 |---------|-----------|
 | Untracked | Add to Stage |
 | Staged | Unstage |
@@ -78,7 +72,55 @@ yong@macBookAir ~/Project1$ npm start
 
 <img src="README_Assets/Proj1_6.png" width="75%">
 
-- `Git Repository` 디렉토리에서 `Staged` 상태의 파일이 존재하는 경우,
-상단 메뉴의 `Git Commit` 버튼을 클릭하면, `Commit Message`를 입력하기 위한
-다이얼로그가 렌더링됩니다. `Commit Message`를 입력하고 버튼을 클릭하면 `Staged` 상태의
-모든 파일이 `Committed` 상태로 저장됩니다.
+- If there is any file which `Git Status` is `Staged`, you can click `Git Commit` Button for commit them. A dialog for entering `Commit Message` will be rendered, and you can click Button for complete commit.
+
+---
+
+### How to Use (Project #2)
+
+<img src="README_Assets/Proj2_1.png" width="100%">
+
+<img src="README_Assets/Proj2_2.png" width="75%">
+
+<div style="display: flex; flex-direction: row">
+  <img src="README_Assets/Proj2_3.png" width="40%">
+  <img src="README_Assets/Proj2_4.png" width="40%">
+</div>
+<div style="display: flex; flex-direction: row">
+  <img src="README_Assets/Proj2_5.png" width="40%">
+  <img src="README_Assets/Proj2_6.png" width="40%">
+</div>
+
+- You can manage Branchess with `Git` Submenu of `Context Menu` when right-click Empty Area of `Git-Managed` Directory.
+It contains `Create`, `Delete`, `Rename`, `Checkout`. For `Create`, name input dialog will be rendered, and for the others,
+select a branch dialog will be rendered.
+
+<img src="README_Assets/Proj2_7.png" width="75%">
+
+- You can merge other branch to current branch with `Git Merge` button at Top Menu. You can select a branch for merging from dialog,
+if Auto-Merge fails, it will be automatically abort the merge process and notify unmerged paths at right bottom of window.
+
+<img src="README_Assets/Proj2_8.png" width="55%">
+
+<img src="README_Assets/Proj2_9.png" width="55%">
+
+- You can check `Commit History` and `Branch Graph` with `Git History` button at Top Menu. When click,
+history list with branch graph will be rendered to dialog, and if you click commit point (`*`),
+you can check detail information of each commits. It is same with `git show` command.
+
+<div style="display: flex; flex-direction: row">
+  <img src="README_Assets/Proj2_10.png" width="40%">
+  <img src="README_Assets/Proj2_11.png" width="40%">
+</div>
+
+- With `Git Clone` button of Top menu, you can clone a Remote Repository. It only supports `https` type, not the `ssh` type.
+Public Repository can be cloned with only URL, and if you select Private Repository, you must enter Remote ID and Token/PW.
+The Private Data inputted will be stored to local file named `GithubInfo.txt`.
+
+---
+
+### Screenshots
+
+<img src="README_Assets/Proj1_1.png" width="75%">
+<img src="README_Assets/Proj1_2.png" width="75%">
+<img src="README_Assets/Proj1_3.png" width="75%">
