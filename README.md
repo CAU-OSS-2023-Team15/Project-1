@@ -54,7 +54,7 @@ Wrong `Git` basic settings means that `Hint` is printed when use `Git` command o
 
 ---
 
-### How to Use
+### How to Use (Project #1)
 
 <img src="README_Assets/Proj1_4.png" width="75%">
 
