@@ -76,6 +76,18 @@ Wrong `Git` basic settings means that `Hint` is printed when use `Git` command o
 
 ---
 
+### How to Use (Project #2)
+
+IMAGE_BRANCH_MANAGE
+
+IMAGE_BRANCH_MERGE
+
+IMAGE_COMMIT_HISTORY
+
+IMAGE_GIT_CLONE
+
+---
+
 ### Screenshots
 
 <img src="README_Assets/Proj1_1.png" width="75%">
