@@ -82,13 +82,14 @@ Wrong `Git` basic settings means that `Hint` is printed when use `Git` command o
 
 <img src="README_Assets/Proj2_2.png" width="75%">
 
-<img src="README_Assets/Proj2_3.png" width="40%">
-
-<img src="README_Assets/Proj2_4.png" width="40%">
-
-<img src="README_Assets/Proj2_5.png" width="40%">
-
-<img src="README_Assets/Proj2_6.png" width="40%">
+<div style="display: flex; flex-direction: row">
+  <img src="README_Assets/Proj2_3.png" width="40%">
+  <img src="README_Assets/Proj2_4.png" width="40%">
+</div>
+<div style="display: flex; flex-direction: row">
+  <img src="README_Assets/Proj2_5.png" width="40%">
+  <img src="README_Assets/Proj2_6.png" width="40%">
+</div>
 
 - You can manage Branchess with `Git` Submenu of `Context Menu` when right-click Empty Area of `Git-Managed` Directory.
 It contains `Create`, `Delete`, `Rename`, `Checkout`. For `Create`, name input dialog will be rendered, and for the others,
@@ -107,9 +108,10 @@ if Auto-Merge fails, it will be automatically abort the merge process and notify
 history list with branch graph will be rendered to dialog, and if you click commit point (`*`),
 you can check detail information of each commits. It is same with `git show` command.
 
-<img src="README_Assets/Proj2_10.png" width="55%">
-
-<img src="README_Assets/Proj2_11.png" width="55%">
+<div style="display: flex; flex-direction: row">
+  <img src="README_Assets/Proj2_10.png" width="40%">
+  <img src="README_Assets/Proj2_11.png" width="40%">
+</div>
 
 - With `Git Clone` button of Top menu, you can clone a Remote Repository. It only supports `https` type, not the `ssh` type.
 Public Repository can be cloned with only URL, and if you select Private Repository, you must enter Remote ID and Token/PW.
