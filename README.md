@@ -40,7 +40,7 @@ yong@macBookAir ~/$ cd Project1
 yong@macBookAir ~/Project1$ npm install
 ```
 
-3. Compile and run our project. `start` command is defined at `package.json`.정의되어있습니다.
+3. Compile and run our project. `start` command is defined at `package.json`.
 ```bash
 yong@macBookAir ~/Project1$ npm start
 ```
